@@ -1,0 +1,55 @@
+[
+  {
+    "id": "1",
+    "user": {
+      "name": "David Martin",
+      "image": "/images/avatars/avatar-2.png"
+    },
+    "title": "Guitar Vibes Playlist",
+    "media": {
+      "image": {
+        "src": "/images/jakayla-toney.png",
+        "alt": "",
+        "width": 408,
+        "height": 365
+      }
+    },
+    "likes": 123,
+    "duration": "1h 23m",
+    "backgroundColor": "bg-black",
+    "textColor": "text-white"
+  },
+  {
+    "id": "2",
+    "user": {
+      "name": "Sarah Johnson",
+      "image": "/images/avatars/avatar-1.png"
+    },
+    "title": "Blocky Vibes Playlist",
+    "media": { "video": "/videos/minecraft" },
+    "likes": 123,
+    "duration": "1h 23m",
+    "backgroundColor": "bg-red-400",
+    "textColor": "text-red-900"
+  },
+  {
+    "id": "3",
+    "user": {
+      "name": "Rover Barkton",
+      "image": "/images/avatars/avatar-3.png"
+    },
+    "title": "Jazzy Vibes Playlist",
+    "media": {
+      "image": {
+        "src": "/images/daniel-angele.png",
+        "alt": "",
+        "width": 436,
+        "height": 365
+      }
+    },
+    "likes": 123,
+    "duration": "1h 23m",
+    "backgroundColor": "bg-cyan-900",
+    "textColor": "text-white"
+  }
+]

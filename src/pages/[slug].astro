@@ -1,0 +1,132 @@
+---
+import { Image } from 'astro:assets'
+
+import Layout from '../layouts/Layout.astro'
+import Avatar from '../components/Avatar.astro'
+import Metadata from '../components/Metadata.astro'
+import Song from '../components/Song.astro'
+import Player from '../components/Player.astro'
+
+import music from '../data/music.json'
+import cards from '../data/cards.json'
+
+const { slug } = Astro.params
+const card = cards.find(({ id }) => id === slug)
+
+if (!card) return Astro.redirect('/404')
+---
+
+<Layout title=`${card.id} - Cards`>
+  <main class="max-w-md mx-auto">
+    <header
+      class:list={[
+        'relative',
+        {
+          [`${card.textColor}`]: true,
+          'text-blue-800': !card.textColor,
+        },
+      ]}
+      transition:name={`card ${card.id} core`}
+      transition:animate="initial"
+    >
+      <div
+        class:list={[
+          'absolute inset-0 -z-10',
+          {
+            [`${card.backgroundColor || 'bg-blue-400'}`]: card.backgroundColor,
+          },
+        ]}
+        transition:name={`card ${card.id} bg`}
+        transition:animate="initial"
+      >
+      </div>
+      <div
+        class="flex flex-col items-center justify-between mb-8 max-w-6xl mx-auto p-8 gap-10"
+      >
+        <div class="relative">
+          <Avatar user={card.user} id={card.id} isStacked />
+          <button
+            class="bg-white h-4 w-4 rounded-full flex items-center justify-center absolute top-0 right-0 mx-auto left-0 translate-x-4 translate-y-8 text-black"
+            transition:name={`card ${card.id} add`}
+            transition:animate="initial"
+            ><svg
+              class="h-3 w-3"
+              viewBox="0 0 15 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              ><path
+                d="M8 2.75C8 2.47386 7.77614 2.25 7.5 2.25C7.22386 2.25 7 2.47386 7 2.75V7H2.75C2.47386 7 2.25 7.22386 2.25 7.5C2.25 7.77614 2.47386 8 2.75 8H7V12.25C7 12.5261 7.22386 12.75 7.5 12.75C7.77614 12.75 8 12.5261 8 12.25V8H12.25C12.5261 8 12.75 7.77614 12.75 7.5C12.75 7.22386 12.5261 7 12.25 7H8V2.75Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+                clip-rule="evenodd"></path></svg
+            ></button
+          >
+        </div>
+
+        <div class="flex flex-col gap-4 text-center">
+          <h1
+            class="text-center text-2xl font-bold"
+            transition:name={`card ${card.id} title`}
+            transition:animate="initial"
+          >
+            {card.title}
+          </h1>
+          <Metadata likes={card.likes} duration={card.duration} id={card.id} />
+          <p transition:animate="fade">
+            Nulla Lorem voluptate amet qui dolor officia ex pariatur laboris
+            culpa cupidatat cupidatat culpa aliqua.
+          </p>
+        </div>
+      </div>
+      {
+        card.media.video && (
+          <div
+            class="h-full w-full object-cover"
+            transition:name={`card ${card.id} media box`}
+            transition:animate="initial"
+          >
+            <video
+              width="600"
+              height="100%"
+              autoplay
+              loop
+              muted
+              playsinline
+              transition:persist={`card ${card.id} media`}
+            >
+              <source src={`${card.media.video}.webm`} type="video/webm" />
+            </video>
+          </div>
+        )
+      }
+      {
+        card.media.image && !card.media.video && (
+          <div
+            class="w-full object-cover"
+            transition:name={`card ${card.id} media box`}
+            transition:animate="initial"
+          >
+            <Image
+              src={card.media.image.src}
+              alt={card.media.image.alt}
+              class="w-full object-cover"
+              width={card.media.image.width}
+              height={card.media.image.height}
+              transition:name={`card ${card.id} media`}
+            />
+          </div>
+        )
+      }
+      <Player id={card.id} isExpanded />
+    </header>
+    <section class="py-8">
+      <ul class="flex flex-col gap-4">
+        {
+          music.map(({ author, song, album }, index) => (
+            <Song author={author} song={song} album={album} index={index} />
+          ))
+        }
+      </ul>
+    </section>
+  </main>
+</Layout>

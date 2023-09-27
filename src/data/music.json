@@ -1,0 +1,52 @@
+[
+  {
+    "author": "The Beatles",
+    "song": "Hey Jude",
+    "album": "/images/albums/beatles.png"
+  },
+  {
+    "author": "Queen",
+    "song": "Bohemian Rhapsody",
+    "album": "/images/albums/queen.png"
+  },
+  {
+    "author": "Led Zeppelin",
+    "song": "Stairway to Heaven",
+    "album": "/images/albums/led-zeppelin.png"
+  },
+  {
+    "author": "Pink Floyd",
+    "song": "Comfortably Numb",
+    "album": "/images/albums/pink-floyd.png"
+  },
+  {
+    "author": "The Rolling Stones",
+    "song": "(I Can't Get No) Satisfaction",
+    "album": "/images/albums/rolling-stones.png"
+  },
+  {
+    "author": "Nirvana",
+    "song": "Smells Like Teen Spirit",
+    "album": "/images/albums/nirvana.png"
+  },
+  {
+    "author": "Michael Jackson",
+    "song": "Billie Jean",
+    "album": "/images/albums/michael-jackson.png"
+  },
+  {
+    "author": "Elvis Presley",
+    "song": "Jailhouse Rock",
+    "album": "/images/albums/elvis.png"
+  },
+  {
+    "author": "Bob Dylan",
+    "song": "Like a Rolling Stone",
+    "album": "/images/albums/bob-dylan.png"
+  },
+  {
+    "author": "David Bowie",
+    "song": "Space Oddity",
+    "album": "/images/albums/bowie.png"
+  }
+]

@@ -1,7 +1,45 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import Card from '../components/Card.astro'
+
+import cards from '../data/cards.json'
 ---
 
-<Layout>
-  <div class="text-red-500 text-3xl font-bold">Hello World</div>
+<Layout title="Cards">
+  <main class="p-10">
+    <div class="mx-auto max-w-sm flex flex-col gap-6">
+      {
+        cards.map(
+          ({
+            id,
+            title,
+            media,
+            user,
+            likes,
+            duration,
+            backgroundColor,
+            textColor,
+          }) => (
+            <Card
+              id={id}
+              title={title}
+              media={media}
+              user={user}
+              likes={likes}
+              duration={duration}
+              backgroundColor={backgroundColor}
+              textColor={textColor}
+            />
+          ),
+        )
+      }
+    </div>
+  </main>
 </Layout>
+
+<!--
+
+	Inspiration:
+	https://live-transitions.pages.dev/
+
+-->

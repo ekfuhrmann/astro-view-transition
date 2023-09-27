@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets'
+
+const { user, id, isStacked = false } = Astro.props
+
+function getInitials(name: string) {
+  const words = name.split(' ')
+  const initials = words.map((word) => word.charAt(0).toUpperCase())
+  return initials.join('')
+}
+---
+
+<div
+  class:list={[
+    'flex items-center gap-4',
+    { 'flex-col justify-center items-center text-center': isStacked },
+  ]}
+>
+  {
+    user.image ? (
+      <Image
+        src={user.image}
+        height={200}
+        width={200}
+        alt=""
+        class="rounded-full outline-2 outline outline-inherit outline-offset-2 h-10 w-10 bg-black/20"
+        aria-hidden="true"
+        transition:name={`avatar ${id} image`}
+      />
+    ) : (
+      <div
+        class="rounded-full outline-2 outline outline-inherit outline-offset-2 h-10 w-10 bg-black/20 text-inherit font-bold text-lg flex items-center justify-center"
+        aria-hidden="true"
+        transition:name={`avatar ${id} image`}
+      >
+        {getInitials(user.name)}
+      </div>
+    )
+  }
+
+  <div class="flex flex-col" transition:name={`avatar ${id} details`}>
+    <p class="font-bold">{user.name}</p>
+    <p class="text-sm">September 2023</p>
+  </div>
+</div>

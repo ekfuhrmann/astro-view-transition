@@ -1,0 +1,110 @@
+---
+import { Image } from 'astro:assets'
+
+import Avatar from './Avatar.astro'
+import Metadata from './Metadata.astro'
+import Player from './Player.astro'
+
+const { title, id, media, user, likes, duration, backgroundColor, textColor } =
+  Astro.props
+---
+
+<article
+  class:list={[
+    'rounded-3xl shadow relative flex flex-col gap-6',
+    {
+      [`${textColor}`]: true,
+      'text-blue-800': !textColor,
+    },
+  ]}
+  transition:name={`card ${id} core`}
+  transition:animate="initial"
+>
+  <div
+    class:list={[
+      'absolute inset-0 rounded-3xl -z-10',
+      {
+        [`${backgroundColor || 'bg-blue-400'}`]: backgroundColor,
+      },
+    ]}
+    transition:name={`card ${id} bg`}
+    transition:animate="initial"
+  >
+  </div>
+  <header class="p-6">
+    <div class="flex flex-col gap-6">
+      <div class="flex justify-between items-center gap-4">
+        <Avatar user={user} id={id} />
+        <button
+          class="bg-white h-7 w-7 rounded-full flex items-center justify-center text-black"
+          transition:name={`card ${id} add`}
+          transition:animate="initial"
+          ><svg
+            class="h-5 w-5"
+            viewBox="0 0 15 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            ><path
+              d="M8 2.75C8 2.47386 7.77614 2.25 7.5 2.25C7.22386 2.25 7 2.47386 7 2.75V7H2.75C2.47386 7 2.25 7.22386 2.25 7.5C2.25 7.77614 2.47386 8 2.75 8H7V12.25C7 12.5261 7.22386 12.75 7.5 12.75C7.77614 12.75 8 12.5261 8 12.25V8H12.25C12.5261 8 12.75 7.77614 12.75 7.5C12.75 7.22386 12.5261 7 12.25 7H8V2.75Z"
+              fill="currentColor"
+              fill-rule="evenodd"
+              clip-rule="evenodd"></path></svg
+          ></button
+        >
+      </div>
+      <a
+        href={id}
+        class="flex flex-col gap-4 after:absolute after:inset-0 after:z-10"
+      >
+        <h1
+          class="text-center text-2xl font-bold"
+          transition:name={`card ${id} title`}
+          transition:animate="initial"
+        >
+          {title}
+        </h1>
+        <Metadata likes={likes} duration={duration} id={id} />
+      </a>
+    </div>
+  </header>
+  {
+    media.video && (
+      <div
+        class="w-full object-cover"
+        transition:name={`card ${id} media box`}
+        transition:animate="initial"
+      >
+        <video
+          width="600"
+          height="100%"
+          autoplay
+          loop
+          muted
+          playsinline
+          transition:persist={`card ${id} media`}
+        >
+          <source src={`${media.video}.webm`} type="video/webm" />
+        </video>
+      </div>
+    )
+  }
+  {
+    media.image && !media.video && (
+      <div
+        class="w-full object-cover"
+        transition:name={`card ${id} media box`}
+        transition:animate="initial"
+      >
+        <Image
+          src={media.image.src}
+          alt={media.image.alt}
+          class="w-full object-cover"
+          width={media.image.width}
+          height={media.image.height}
+          transition:name={`card ${id} media`}
+        />
+      </div>
+    )
+  }
+  <Player id={id} />
+</article>
