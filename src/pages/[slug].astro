@@ -10,6 +10,11 @@ import Player from '../components/Player.astro'
 import music from '../data/music.json'
 import cards from '../data/cards.json'
 
+export async function getStaticPaths() {
+  const paths = cards.map((card) => ({ params: { slug: card.id } }))
+  return paths
+}
+
 const { slug } = Astro.params
 const card = cards.find(({ id }) => id === slug)
 
